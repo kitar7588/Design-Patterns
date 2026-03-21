@@ -8,12 +8,14 @@ class Singleton:
             Singleton()
         return Singleton._instance
 
-    def __init__(self):
-        if Singleton._instance is not None:
-            return
-        self.id = id(self)
-        Singleton._instance = self
-        pass
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(Singleton, cls).__new__(cls)
+        return cls._instance
     
+    def __init__(self):
+        self.id = id(self)
+        pass
+
     def get_id(self):
         return self.id
