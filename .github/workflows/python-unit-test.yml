@@ -6,18 +6,16 @@ on:
   pull_request:
     branches: [ "master" ]
 
-on: [push, pull_request]
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: [actions/checkout@v4](https://github.com)
+      uses: actions/checkout@v4
 
     - name: Set up Python 3.8
-      uses: [actions/setup-python@v5](https://github.com/actions/setup-python)
+      uses: actions/setup-python@v5
       with:
         python-version: '3.8'
 
@@ -27,9 +25,8 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Start running tests
-      run: |
-        echo "Start unit tests"
+      run: echo "Start unit tests"
+
     - name: test factory method usecase
-      run: |
-        working-directory: ./FactoryMethod
-        make test_usecase
+      working-directory: ./FactoryMethod
+      run: make test_usecase
